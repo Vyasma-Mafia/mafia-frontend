@@ -141,7 +141,7 @@ export default {
       isPin: false,
       activeGames: [],
       endGames: [],
-      url: 'http://itmomafia.herokuapp.com'
+      url: 'http://localhost:8080'
     }
   },
   mounted() {
