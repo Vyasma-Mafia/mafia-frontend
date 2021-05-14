@@ -143,8 +143,8 @@
   </div>
 <!--  <footerM v-if="isLoad"> </footerM>-->
   <div class="bottom">
-    <button class="button-refresh-role" v-if="!getJson.gameStarted" @click="reshuffleGame"><span>Поменять роли</span></button>
-    <button class="button-end-game" v-else @click="showPopupGame"><span>Завершить игру</span></button>
+    <button class="button-refresh-role" v-if="!getJson.gameStarted && isLoad" @click="reshuffleGame"><span>Поменять роли</span></button>
+    <button class="button-end-game" v-else-if="isLoad" @click="showPopupGame"><span>Завершить игру</span></button>
   </div>
 </template>
 
