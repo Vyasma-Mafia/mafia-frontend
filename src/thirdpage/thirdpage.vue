@@ -121,7 +121,7 @@
               </div>
 
               <div class="activ">
-                <div class="playerPut" @click="userPut(index + 1)">
+                <div class="playerPut" @click="userPut(player.sitNumber)">
                   <i class="fas" :class="player.icon"></i>
                 </div>
                 <div class="foulTake" @click="FoulTake(index, player.playerId)"><i class="fa fa-minus"></i></div>
@@ -329,13 +329,13 @@ export default {
     if (this.startGame) {
       if (this.putUsers.includes(elem)) {
         this.putUsers = this.putUsers.filter((item) => item !== elem);
-        this.playersList[elem - 1].icon = 'fa-thumbs-up'
+        this.playersList[elem].icon = 'fa-thumbs-up'
         //this.$set(this.playersList[elem-1], 'icon', faThumbsUp)
         // console.log(this.playersList[elem - 1])
 
       } else {
         this.putUsers.push(elem)
-        this.playersList[elem - 1].icon = 'fa-user'
+        this.playersList[elem].icon = 'fa-user'
         //this.$set(this.playersList[elem-1], 'icon', faUser)
         // console.log(this.playersList[elem - 1])
 
