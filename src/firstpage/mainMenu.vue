@@ -119,12 +119,12 @@
   </div>
 
   </div>
-  <footerM></footerM>
+<!--  <footerM></footerM>-->
   </div>
 </template>
 
 <script>
-import footerM from "../footerM";
+// import footerM from "../footerM";
 // import OtpInput from "@bachdgvn/vue-otp-input"
 import axios from "axios";
 import AppLoader from "../components/AppLoader";
@@ -191,7 +191,7 @@ export default {
     }
   },
 
-  components: {footerM, AppLoader}
+  components: { AppLoader}
 }
 </script>
 

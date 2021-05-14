@@ -141,7 +141,7 @@
     </div>
 
   </div>
-  <footerM v-if="isLoad"> </footerM>
+<!--  <footerM v-if="isLoad"> </footerM>-->
   <div class="bottom">
     <button class="button-refresh-role" v-if="!getJson.gameStarted" @click="reshuffleGame"><span>Поменять роли</span></button>
     <button class="button-end-game" v-else @click="showPopupGame"><span>Завершить игру</span></button>
@@ -152,7 +152,7 @@
 import TheTimer from "./TheTimer";
 import VueFlip from 'vue-flip';
 import vPopup from '../components/v-popup'
-import footerM from "../footerM";
+// import footerM from "../footerM";
 import axios from "axios";
 import AppLoader from "../components/AppLoader";
 import router from "../router";
@@ -455,7 +455,7 @@ beforeUnmount()
   clearInterval(this.interval)
 }
 ,
-components: {TheTimer, footerM, 'vue-flip':VueFlip, vPopup,AppLoader}
+components: {TheTimer,'vue-flip':VueFlip, vPopup,AppLoader}
 }
 
 </script>

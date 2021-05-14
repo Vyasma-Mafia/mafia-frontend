@@ -39,7 +39,7 @@
         @remove="isDelete = true; delItem = $event"
         @randomSort="randomSort"></DragList>
 
-    <footerM></footerM>
+<!--    <footerM></footerM>-->
   </div>
   <div class="bottom" v-if="isLoad">
 
@@ -51,7 +51,7 @@
 
 <script>
 import axios from 'axios'
-import footerM from "../components/footerM";
+// import footerM from "../components/footerM";
 import DragList from "./DragList";
 import TheSearch from "./TheSearch";
 import AppLoader from "../components/AppLoader";
@@ -223,7 +223,7 @@ export default {
   //
   //   }
   // },
-  components: {footerM, DragList, TheSearch, AppLoader, vPopup}
+  components: { DragList, TheSearch, AppLoader, vPopup}
 }
 </script>
 
