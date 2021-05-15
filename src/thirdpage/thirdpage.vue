@@ -116,6 +116,8 @@
                     </template>
                   </vue-flip>
                 </div>
+
+
               </div>
 
               <div class="activ">
@@ -191,9 +193,6 @@ export default {
   methods: {
     goToMenu() {
       router.push({ path: '/first' })
-    },
-    test1(evl){
-      console.log(evl)
     },
     async endGame(val) {
       // // console.log(val)
@@ -339,7 +338,6 @@ export default {
         this.playersList[index].icon = 'fa-user'
         //this.$set(this.playersList[elem-1], 'icon', faUser)
         // console.log(this.playersList[elem - 1])
-
 
       }
     }
