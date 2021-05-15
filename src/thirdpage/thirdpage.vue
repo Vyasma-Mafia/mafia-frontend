@@ -116,12 +116,10 @@
                     </template>
                   </vue-flip>
                 </div>
-
-
               </div>
 
               <div class="activ">
-                <div class="playerPut" @click="userPut(player.sitNumber)">
+                <div class="playerPut" @click="userPut(player.sitNumber, index)">
                   <i class="fas" :class="player.icon"></i>
                 </div>
                 <div class="foulTake" @click="FoulTake(index, player.playerId)"><i class="fa fa-minus"></i></div>
@@ -193,6 +191,9 @@ export default {
   methods: {
     goToMenu() {
       router.push({ path: '/first' })
+    },
+    test1(evl){
+      console.log(evl)
     },
     async endGame(val) {
       // // console.log(val)
@@ -325,19 +326,20 @@ export default {
 
     }
   },
-  userPut(elem) {
+  userPut(elem, index) {
     if (this.startGame) {
       if (this.putUsers.includes(elem)) {
         this.putUsers = this.putUsers.filter((item) => item !== elem);
-        this.playersList[elem].icon = 'fa-thumbs-up'
+        this.playersList[index].icon = 'fa-thumbs-up'
         //this.$set(this.playersList[elem-1], 'icon', faThumbsUp)
         // console.log(this.playersList[elem - 1])
 
       } else {
         this.putUsers.push(elem)
-        this.playersList[elem].icon = 'fa-user'
+        this.playersList[index].icon = 'fa-user'
         //this.$set(this.playersList[elem-1], 'icon', faUser)
         // console.log(this.playersList[elem - 1])
+
 
       }
     }
