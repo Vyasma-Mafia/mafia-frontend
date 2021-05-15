@@ -293,6 +293,12 @@ export default {
       this.isLoad = true
       this.startGame = this.getJson.gameStarted
       this.gameEnd = this.getJson.gameFinished
+      if (this.startGame) {
+        this.interval = setInterval(() => {
+          this.time = new Date()
+        }, 1000)
+
+      }
       if (this.gameEnd) {
         if ( this.gameEnd) {
           this.gameEndWho = 'МИРНЫX'
