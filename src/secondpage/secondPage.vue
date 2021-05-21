@@ -61,7 +61,7 @@ import vPopup from '../components/v-popup';
 export default {
   data() {
     return {
-      url: 'http://itmomafia.herokuapp.com',
+      url: 'http://localhost:8081',
       isLoad: false,
       delItem: null,
       inputWarning: true,
