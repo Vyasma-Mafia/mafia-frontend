@@ -57,7 +57,7 @@ export default {
       // xhr.send()
 
       const response = await fetch(
-          'http://localhost:8081/player/',{
+          'http://itmomafia.herokuapp.com/player/',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default {
     async loadPeople() {
       try {
         this.loading = true;
-        const {data} = await axios.get('http://localhost:8081/player/')
+        const {data} = await axios.get('http://itmomafia.herokuapp.com/player/')
         setTimeout(() => {
           this.people = data
 
@@ -109,7 +109,7 @@ export default {
     async removePerson(id) {
       try {
         const person = this.people.find(person => person.id === id).name
-        await axios.delete(`http://localhost:8081/player/${id}`)
+        await axios.delete(`http://itmomafia.herokuapp.com/player/${id}`)
         this.people =  this.people.filter(person => person.id !== id)
         this.alert = {
           type: 'primary',
