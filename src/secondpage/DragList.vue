@@ -130,7 +130,8 @@ export default {
 
 }
 .list-group {
-
+ margin-top: 0.4rem;
+  width: 87%;
 }
 
 .player-list {

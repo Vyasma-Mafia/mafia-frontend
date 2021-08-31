@@ -3,7 +3,6 @@ import mainMenu from "./firstpage/mainMenu";
 import secondPage from "./secondpage/secondPage";
 import thirdpage from "./thirdpage/thirdpage";
 
-
 export default createRouter({
     history: createWebHistory(),
     routes: [

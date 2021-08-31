@@ -70,7 +70,7 @@ export default {
 
  .search {
    display: flex;
-   margin: 1em;
+   /*margin: 1em;*/
    margin-bottom: 2px !important;
    width:50%;
    border-radius: 15px;

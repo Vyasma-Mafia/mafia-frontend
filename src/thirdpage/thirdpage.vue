@@ -472,7 +472,11 @@ components: {TheTimer,'vue-flip':VueFlip, vPopup,AppLoader}
   color:#ddd;
   background-color: #2c3e50;
   font-weight: 700;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
+
+
 .activ {
   position: relative;
   display: inline;
@@ -799,8 +803,12 @@ li.liPlayers {
   border-bottom-right-radius: 10px;
   margin-bottom: 4px;
   background-color: #fff;
-
+  &.death {
+    background-color: #2c3e50 !important;
+  }
 }
+
+
 
 ul.ulList {
   width: 100%;
