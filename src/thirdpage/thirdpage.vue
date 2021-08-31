@@ -91,46 +91,46 @@
         <ul class="ulList">
           <li class="liPlayers" :class="player.alive ? '' : 'death'" v-for="(player, index) in playersList" :key="player.playerId">
             <div class="death" v-if="player.alive">
-            <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
-            <div class="playerName">{{ player.playerName }}</div>
-            <div class="activity">
-              <div class="playerRole">
+              <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
+              <div class="playerName">{{ player.playerName }}</div>
+              <div class="activity">
+                <div class="playerRole">
 
 
-                <div class="showRoles">
-                  <vue-flip v-model="roleShow" width="24px" height="25px">
-                    <template v-slot:front class="front">
-                      <div class="maf" v-if="player.role == 'BLACK'"><img src="../img/maf.svg" alt=""
+                  <div class="showRoles">
+                    <vue-flip v-model="roleShow" width="24px" height="25px">
+                      <template v-slot:front class="front">
+                        <div class="maf" v-if="player.role == 'BLACK'"><img src="../img/maf.svg" alt=""
+                                                                            style="width:25px; height:25px;"></div>
+                        <div class="sherif" v-if="player.role == 'SHERIFF'"><img src="../img/sherif.svg" alt=""
+                                                                                 style="width:25px; height:25px;"></div>
+                        <div class="red" v-if="player.role == 'RED'"><img src="../img/mirn.svg" alt=""
                                                                           style="width:25px; height:25px;"></div>
-                      <div class="sherif" v-if="player.role == 'SHERIFF'"><img src="../img/sherif.svg" alt=""
-                                                                               style="width:25px; height:25px;"></div>
-                      <div class="red" v-if="player.role == 'RED'"><img src="../img/mirn.svg" alt=""
-                                                                        style="width:25px; height:25px;"></div>
-                      <div class="don" v-if="player.role == 'DON'"><img src="../img/don.svg" alt=""
-                                                                        style="width:25px; height:25px;"></div>
-                    </template>
-                    <template v-slot:back class="back">
-                      <div class="shirt">
-                        <div class="shirt"><img src="../img/card.svg" alt=""
-                                                style="width:25px; height:25px;"></div>
-                      </div>
-                    </template>
-                  </vue-flip>
+                        <div class="don" v-if="player.role == 'DON'"><img src="../img/don.svg" alt=""
+                                                                          style="width:25px; height:25px;"></div>
+                      </template>
+                      <template v-slot:back class="back">
+                        <div class="shirt">
+                          <div class="shirt"><img src="../img/card.svg" alt=""
+                                                  style="width:25px; height:25px;"></div>
+                        </div>
+                      </template>
+                    </vue-flip>
+                  </div>
+
+
                 </div>
 
-
-              </div>
-
-              <div class="activ">
-                <div class="playerPut" @click="userPut(player.sitNumber, index)">
-                  <i class="fas" :class="player.icon"></i>
+                <div class="activ">
+                  <div class="playerPut" @click="userPut(player.sitNumber, index)">
+                    <i class="fas" :class="player.icon"></i>
+                  </div>
+                  <div class="foulTake" @click="FoulTake(index, player.playerId)"><i class="fa fa-minus"></i></div>
+                  <div class="foul"><span>{{ player.foul }}</span></div>
+                  <div class="foulAdd" @click="FoulAdd(index, player.playerId)"><i class="fa fa-plus"></i></div>
                 </div>
-                <div class="foulTake" @click="FoulTake(index, player.playerId)"><i class="fa fa-minus"></i></div>
-                <div class="foul"><span>{{ player.foul }}</span></div>
-                <div class="foulAdd" @click="FoulAdd(index, player.playerId)"><i class="fa fa-plus"></i></div>
+                <!--            <div class="playerKick">X</div>-->
               </div>
-              <!--            <div class="playerKick">X</div>-->
-            </div>
             </div>
             <div class="deathElse" v-else>
               {{ player.playerName}}
@@ -142,7 +142,7 @@
     </div>
 
   </div>
-<!--  <footerM v-if="isLoad"> </footerM>-->
+  <!--  <footerM v-if="isLoad"> </footerM>-->
   <div class="bottom">
     <button class="button-refresh-role" v-if="!getJson.gameStarted && isLoad" @click="reshuffleGame"><span>Поменять роли</span></button>
     <button class="button-end-game" v-else-if="isLoad" @click="showPopupGame"><span>Завершить игру</span></button>
@@ -237,26 +237,26 @@ export default {
             .catch(function (error) {
               alert('Ошибка сервера ' + error)
             });
-      if (delPlayerr.data == 'GAME_IN_PROGRESS') {
-        this.playersList = this.playersList.filter((item) => item.id !== this.delPlayer.id);
-        this.closePopup()
-        this.putUsers = []
-        this.fetchData()
+        if (delPlayerr.data == 'GAME_IN_PROGRESS') {
+          this.playersList = this.playersList.filter((item) => item.id !== this.delPlayer.id);
+          this.closePopup()
+          this.putUsers = []
+          this.fetchData()
+        }
+        if (delPlayerr.data == 'RED_WIN') {
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МИРНЫХ'
+        }
+        if (delPlayerr.data == 'BLACK_WIN') {
+          // console.log(this.gameEnd + this.gameEndWho)
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МАФИИ'
+        }
       }
-      if (delPlayerr.data == 'RED_WIN') {
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МИРНЫХ'
-      }
-      if (delPlayerr.data == 'BLACK_WIN') {
-        // console.log(this.gameEnd + this.gameEndWho)
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МАФИИ'
-      }
-    }
     },
     async reshuffleGame() {
       const reshuffle = await axios.post(this.url + '/game/reshuffle', {
@@ -282,10 +282,10 @@ export default {
       this.error = this.post = null
       this.isLoad = false
       // замените `getPost` используемым методом получения данных / доступа к API
-       const test = await axios.get(this.url + '/gameInfo/' + this.$route.params.gameId)
+      const test = await axios.get(this.url + '/gameInfo/' + this.$route.params.gameId)
           .then(function (response) {
-          return response
-          }
+                return response
+              }
           )
           .catch(function (error) {
             alert('Ошибка сервера ' + error)
@@ -312,71 +312,9 @@ export default {
         this.playersList[i].icon = 'fa-thumbs-up'; // Add "total": 2 to all objects in array
       }
     },
-  async startGameFunc() {
-    const startGame = await axios.post(this.url + '/game/' + this.$route.params.gameId + '/start', {
-      id:  this.$route.params.gameId
-    })
-        .then(function (response) {
-              return response
-            }
-        )
-        .catch(function (error) {
-          alert('Ошибка сервера ' + error)
-        });
-    if (startGame) {
-      this.fetchData()
-      this.startGame = !this.startGame
-      this.interval = setInterval(() => {
-        this.time = new Date()
-      }, 1000)
-
-    }
-  },
-  userPut(elem, index) {
-    if (this.startGame) {
-      if (this.putUsers.includes(elem)) {
-        this.putUsers = this.putUsers.filter((item) => item !== elem);
-        this.playersList[index].icon = 'fa-thumbs-up'
-        //this.$set(this.playersList[elem-1], 'icon', faThumbsUp)
-        // console.log(this.playersList[elem - 1])
-
-      } else {
-        this.putUsers.push(elem)
-        this.playersList[index].icon = 'fa-user'
-        //this.$set(this.playersList[elem-1], 'icon', faUser)
-        // console.log(this.playersList[elem - 1])
-
-      }
-    }
-  },
-  // MODAL DELETE
-  showPopup(player, index) {
-    if (this.startGame) {
-      this.isPopup = true;
-      this.delPlayer = player
-      this.delPlayerName = '[ ' + index + ' ] ' + player.playerName
-    }
-  },
-  closePopup() {
-    this.isPopup = false;
-  },
-  //MODAL GAMEOVER
-  showPopupGame() {
-    this.gameOver = true;
-  },
-  closePopupGame() {
-    this.gameOver = false;
-  },
-  async FoulTake(idx, player) {
-    const fouls = this.playersList[idx].foul - 1
-    if (this.playersList[idx].foul != 0) {
-      this.playersList[idx].foul = this.playersList[idx].foul - 1
-      const FoulTake = await axios.patch(this.url + '/gameInfo', {
-        id: this.$route.params.gameId,
-        playerId: player,
-        fouls: fouls,
-        alive: true,
-        points: 3,
+    async startGameFunc() {
+      const startGame = await axios.post(this.url + '/game/' + this.$route.params.gameId + '/start', {
+        id:  this.$route.params.gameId
       })
           .then(function (response) {
                 return response
@@ -385,67 +323,129 @@ export default {
           .catch(function (error) {
             alert('Ошибка сервера ' + error)
           });
-      if (FoulTake.data == 'GAME_IN_PROGRESS') {
-        this.playersList[idx].foul = this.playersList[idx].foul - 0
-      }
-      if (FoulTake.data == 'RED_WIN') {
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МИРНЫХ'
-      }
-      if (FoulTake.data == 'BLACK_WIN') {
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МИРНЫХ'
-      }
-      }
-  },
-  async FoulAdd(idx, player) {
+      if (startGame) {
+        this.fetchData()
+        this.startGame = !this.startGame
+        this.interval = setInterval(() => {
+          this.time = new Date()
+        }, 1000)
 
-    const fouls = this.playersList[idx].foul + 1
-    if (this.playersList[idx].foul < 4) {
-      this.playersList[idx].foul = this.playersList[idx].foul + 1
-      const FoulAdd = await axios.patch(this.url + '/gameInfo', {
-        id: this.$route.params.gameId,
-        playerId: player,
-        fouls: fouls,
-        alive: true,
-        points: 3,
-      })
-          .then(function (response) {
-                return response
-              }
-          )
-          .catch(function (error) {
-            alert('Ошибка сервера ' + error)
-          });
-      if (FoulAdd.data == 'GAME_IN_PROGRESS') {
-        this.playersList[idx].foul = this.playersList[idx].foul + 0
       }
-      if (FoulAdd.data == 'RED_WIN') {
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МИРНЫХ'
+    },
+    userPut(elem, index) {
+      if (this.startGame) {
+        if (this.putUsers.includes(elem)) {
+          this.putUsers = this.putUsers.filter((item) => item !== elem);
+          this.playersList[index].icon = 'fa-thumbs-up'
+          //this.$set(this.playersList[elem-1], 'icon', faThumbsUp)
+          // console.log(this.playersList[elem - 1])
+
+        } else {
+          this.putUsers.push(elem)
+          this.playersList[index].icon = 'fa-user'
+          //this.$set(this.playersList[elem-1], 'icon', faUser)
+          // console.log(this.playersList[elem - 1])
+
+        }
       }
-      if (FoulAdd.data == 'BLACK_WIN') {
-        this.putUsers = []
-        this.closePopup()
-        this.gameEnd = true
-        this.gameEndWho = 'МИРНЫХ'
+    },
+    // MODAL DELETE
+    showPopup(player, index) {
+      if (this.startGame) {
+        this.isPopup = true;
+        this.delPlayer = player
+        this.delPlayerName = '[ ' + index + ' ] ' + player.playerName
       }
+    },
+    closePopup() {
+      this.isPopup = false;
+    },
+    //MODAL GAMEOVER
+    showPopupGame() {
+      this.gameOver = true;
+    },
+    closePopupGame() {
+      this.gameOver = false;
+    },
+    async FoulTake(idx, player) {
+      const fouls = this.playersList[idx].foul - 1
+      if (this.playersList[idx].foul != 0) {
+        this.playersList[idx].foul = this.playersList[idx].foul - 1
+        const FoulTake = await axios.patch(this.url + '/gameInfo', {
+          id: this.$route.params.gameId,
+          playerId: player,
+          fouls: fouls,
+          alive: true,
+          points: 3,
+        })
+            .then(function (response) {
+                  return response
+                }
+            )
+            .catch(function (error) {
+              alert('Ошибка сервера ' + error)
+            });
+        if (FoulTake.data == 'GAME_IN_PROGRESS') {
+          this.playersList[idx].foul = this.playersList[idx].foul - 0
+        }
+        if (FoulTake.data == 'RED_WIN') {
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МИРНЫХ'
+        }
+        if (FoulTake.data == 'BLACK_WIN') {
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МИРНЫХ'
+        }
+      }
+    },
+    async FoulAdd(idx, player) {
+
+      const fouls = this.playersList[idx].foul + 1
+      if (this.playersList[idx].foul < 4) {
+        this.playersList[idx].foul = this.playersList[idx].foul + 1
+        const FoulAdd = await axios.patch(this.url + '/gameInfo', {
+          id: this.$route.params.gameId,
+          playerId: player,
+          fouls: fouls,
+          alive: true,
+          points: 3,
+        })
+            .then(function (response) {
+                  return response
+                }
+            )
+            .catch(function (error) {
+              alert('Ошибка сервера ' + error)
+            });
+        if (FoulAdd.data == 'GAME_IN_PROGRESS') {
+          this.playersList[idx].foul = this.playersList[idx].foul + 0
+        }
+        if (FoulAdd.data == 'RED_WIN') {
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МИРНЫХ'
+        }
+        if (FoulAdd.data == 'BLACK_WIN') {
+          this.putUsers = []
+          this.closePopup()
+          this.gameEnd = true
+          this.gameEndWho = 'МИРНЫХ'
+        }
+      }
+    },
+    dateFilter(value) {
+      const options = {}
+      options.hour = '2-digit'
+      options.minute = '2-digit'
+      options.second = '2-digit'
+      return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value))
     }
-  },
-  dateFilter(value) {
-    const options = {}
-    options.hour = '2-digit'
-    options.minute = '2-digit'
-    options.second = '2-digit'
-    return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value))
   }
-}
 // ,
 // mounted() {
 //
@@ -455,14 +455,14 @@ export default {
 //     this.playersList[i].icon = 'fa-thumbs-up'; // Add "total": 2 to all objects in array
 //   }
 // }
-,
+  ,
 
-beforeUnmount()
-{
-  clearInterval(this.interval)
-}
-,
-components: {TheTimer,'vue-flip':VueFlip, vPopup,AppLoader}
+  beforeUnmount()
+  {
+    clearInterval(this.interval)
+  }
+  ,
+  components: {TheTimer,'vue-flip':VueFlip, vPopup,AppLoader}
 }
 
 </script>
@@ -810,7 +810,7 @@ li.liPlayers {
 }
 
 
-
+//1
 ul.ulList {
   width: 100%;
   padding: 0;
@@ -838,20 +838,13 @@ ul.ulList {
 }
 .razr {
   position: absolute;
-  transform: translate(-50%, -50%) rotate(
-          -45deg
-  ) !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
   background-color: white;
-  width: 65px;
+  width: 100px;
   padding: 2px;
-  border: 1px solid #2c3e50;
+  border:1px solid #2c3e50;
   color: #000000;
   text-align: center;
   font-size: 0.6em;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 15%;
-  box-shadow: 0 8px 15px -7px rgb(0 0 0 / 50%);
-  border-bottom-right-radius: 15%;
 }
 </style>

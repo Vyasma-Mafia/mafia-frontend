@@ -82,45 +82,45 @@
       <div class="scrollableActive">
         <ul class="ulBorder">
           <div class="haveGames" v-if="activeGames.length">
-          <li v-for="games in activeGames" :key="games.gameId" @click="routeActive(games.gameId)">
-            <div class="gamePlayers active">
-              <div class="gamePlayersNick">{{ games.playerNames.toString() }}</div>
-              <div class="gamePlayersEnter"><img src="../img/game.svg" alt="" style="height:25px;"></div>
+            <li v-for="games in activeGames" :key="games.gameId" @click="routeActive(games.gameId)">
+              <div class="gamePlayers active">
+                <div class="gamePlayersNick">{{ games.playerNames.toString() }}</div>
+                <div class="gamePlayersEnter"><img src="../img/game.svg" alt="" style="height:25px;"></div>
+              </div>
+            </li>
+          </div>
+          <div class="haveNotGames" v-if="!activeGames.length">
+            <li>
+              <div class="gamePlayers active">
+                <div class="gamePlayersNick">Нет активных игр :(</div>
+                <div class="gamePlayersEnter"><img src="../img/game.svg" alt="" style="height:25px;"></div>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div class="center">
+
+        <h3>Прошедшие игры</h3>
+      </div>
+      <div class="scrollable">
+        <ul class="ulBorder">
+          <li v-for="games in endGames" :key="games.gameId">
+            <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
+              <div class="gamePlayersNick">
+                {{ games.playerNames.toString() }}
+              </div>
+              <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
+                                                                        style="height:25px;"></div>
+              <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
+                                                                       style="height:25px;"></div>
             </div>
           </li>
-          </div>
-      <div class="haveNotGames" v-if="!activeGames.length">
-      <li>
-        <div class="gamePlayers active">
-          <div class="gamePlayersNick">Нет активных игр :(</div>
-          <div class="gamePlayersEnter"><img src="../img/game.svg" alt="" style="height:25px;"></div>
-        </div>
-      </li>
+        </ul>
+      </div>
+
     </div>
-    </ul>
-  </div>
-  <div class="center">
-
-    <h3>Прошедшие игры</h3>
-  </div>
-  <div class="scrollable">
-    <ul class="ulBorder">
-      <li v-for="games in endGames" :key="games.gameId">
-        <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
-          <div class="gamePlayersNick">
-            {{ games.playerNames.toString() }}
-          </div>
-          <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
-                                                                    style="height:25px;"></div>
-          <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
-                                                                   style="height:25px;"></div>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  </div>
-<!--  <footerM></footerM>-->
+    <!--  <footerM></footerM>-->
   </div>
 </template>
 
@@ -197,26 +197,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+//1
 .razr {
   position: absolute;
-  transform: translate(-50%, -50%) rotate(
-          -45deg
-  ) !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
   background-color: white;
-  width: 65px;
+  width: 100px;
   padding: 2px;
-  border: 1px solid #2c3e50;
+  border:1px solid #2c3e50;
   color: #000000;
   text-align: center;
   font-size: 0.6em;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 15%;
-  box-shadow: 0 8px 15px -7px rgb(0 0 0 / 50%);
-  border-bottom-right-radius: 15%;
 }
-
 
 
 .first {

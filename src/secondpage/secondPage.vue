@@ -8,7 +8,7 @@
       :btnStr2="'Да'"
       :btnStr3="'Нет'"
   >
-
+    <!--1-->
     <b>Вы дествительно хотите удалить игрока из списка?</b>
   </vPopup>
 
@@ -40,7 +40,7 @@
         @remove="isDelete = true; delItem = $event"
         @randomSort="randomSort"></DragList>
 
-<!--    <footerM></footerM>-->
+    <!--    <footerM></footerM>-->
   </div>
   <div class="bottom" v-if="isLoad">
 
@@ -231,20 +231,13 @@ export default {
 <style>
 .razr {
   position: absolute;
-  transform: translate(-50%, -50%) rotate(
-      -45deg
-  ) !important;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
   background-color: white;
-  width: 65px;
+  width: 100px;
   padding: 2px;
-  border: 1px solid #2c3e50;
+  border:1px solid #2c3e50;
   color: #000000;
   text-align: center;
   font-size: 0.6em;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 15%;
-  box-shadow: 0 8px 15px -7px rgb(0 0 0 / 50%);
-  border-bottom-right-radius: 15%;
 }
 </style>
