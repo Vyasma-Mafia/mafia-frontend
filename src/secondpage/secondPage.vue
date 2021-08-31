@@ -16,6 +16,7 @@
     <AppLoader></AppLoader>
   </div>
   <div class="container card2" v-if="isLoad">
+    <div class="razr">v.1.2 Abobus</div>
     <div class="form-control center" id="inputDiv" :class="inputWarning ? '' : 'invalid'" @submit.prevent="">
       <input
           type="text"
@@ -228,5 +229,15 @@ export default {
 </script>
 
 <style>
-
+.razr {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(-45deg) !important;
+  background-color: white;
+  width: 100px;
+  padding: 2px;
+  border:1px solid #2c3e50;
+  color: #000000;
+  text-align: center;
+  font-size: 0.6em;
+}
 </style>

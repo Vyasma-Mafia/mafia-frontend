@@ -7,6 +7,7 @@
         <i class="fa fa-times" @click="closePopup"></i>
       </span>
     </div>
+<!--    f-->
     <div class="v-popup__content">
       <slot></slot>
     </div>
