@@ -34,10 +34,8 @@
         @updateColor="colorAddSearch"
     ></TheSearch>
     <DragList
-        v-if="list.length > 0"
         :list="list"
         @refresh="refreshList"
-        @remove="isDelete = true; delItem = $event"
         @randomSort="randomSort"></DragList>
 
     <!--    <footerM></footerM>-->
@@ -134,6 +132,8 @@ export default {
       if (SearchIdElement.classList.contains('nochose')) {
         SearchIdElement.classList.add("chose");
         SearchIdElement.classList.remove("nochose");
+        console.log(element)
+        console.log(this.list)
         this.list.push(element)
         this.provList.push(element)
 
