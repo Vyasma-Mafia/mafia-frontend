@@ -49,7 +49,7 @@ export default {
   methods: {
     async changes() {
       // const xhr = new XMLHttpRequest()
-      // xhr.open('GET', 'http://localhost:8081/player/')
+      // xhr.open('GET', 'http:///player/')
       //
       // xhr.onload = () => {
       //   console.log(xhr.response)
@@ -57,7 +57,7 @@ export default {
       // xhr.send()
 
       const response = await fetch(
-          'http://localhost:8081/player/',{
+          '0/player/',{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ export default {
     async loadPeople() {
       try {
         this.loading = true;
-        const {data} = await axios.get('http://localhost:8081/player/')
+        const {data} = await axios.get('http:///player/')
         setTimeout(() => {
           this.people = data
 
@@ -93,7 +93,7 @@ export default {
         }
         console.log(e.message);
       }
-      //const {data} = await axios.get('http://localhost:8081/player/')
+      //const {data} = await axios.get('http:///player/')
       // const result = Object.keys(data).map(
       //   key => {
       //     return {
@@ -109,7 +109,7 @@ export default {
     async removePerson(id) {
       try {
         const person = this.people.find(person => person.id === id).name
-        await axios.delete(`http://localhost:8081/player/${id}`)
+        await axios.delete(`http:///player/${id}`)
         this.people =  this.people.filter(person => person.id !== id)
         this.alert = {
           type: 'primary',

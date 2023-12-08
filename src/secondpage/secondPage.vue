@@ -62,7 +62,7 @@ import vPopup from '../components/v-popup';
 export default {
   data() {
     return {
-      url: 'http://localhost:8081',
+      url: '',
       isLoad: false,
       delItem: null,
       inputWarning: true,

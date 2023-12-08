@@ -6,7 +6,7 @@ import thirdpage from "./thirdpage/thirdpage";
 export default createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/first', component: mainMenu, alias: '/' },
+                { path: '/first', component: mainMenu, alias: '/' },
         { path: '/second', component: secondPage},
         {
             path: '/third/:gameId',

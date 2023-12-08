@@ -165,7 +165,7 @@ export default {
       isReshuffle: false,
       gameEnd: false,
       gameEndWho: '',
-      url: 'http://localhost:8081',
+      url: '',
       isLoad: false,
       gameId: null,
       delPlayerName: '',
