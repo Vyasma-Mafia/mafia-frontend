@@ -28,6 +28,7 @@
 
         item-key="id"
     >
+      <div v-for="element in lists" :key="element.id">{{element}}</div>
 
       <template #item="{ element, index }">
         <li class="list-group-item li-drag">
