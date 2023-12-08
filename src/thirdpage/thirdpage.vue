@@ -165,7 +165,7 @@ export default {
       isReshuffle: false,
       gameEnd: false,
       gameEndWho: '',
-      url: 'http://itmomafia.herokuapp.com',
+      url: 'http://localhost:8081',
       isLoad: false,
       gameId: null,
       delPlayerName: '',
