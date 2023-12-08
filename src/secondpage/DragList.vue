@@ -14,7 +14,6 @@
     <draggable
         class="list-group"
 
-        tag="transition-group"
         :component-data="{
           tag: 'ul',
           type: 'transition',
