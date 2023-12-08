@@ -4,7 +4,7 @@
   <div class="row hello">
     <div class="spisok">
       <button class="btn primary btn-random" @click="$emit('randomSort', lists)">
-       <!-- $emit('randomSort', lists) -->
+<!--        $emit('randomSort', lists)-->
         <div></div>
       </button>
 
@@ -21,14 +21,13 @@
           name: 'flip-list'
         }"
 
-        v-model="lists"
+        :list="lists"
         v-bind="dragOptions"
         @start="startDrag"
         @end="endDrag"
 
         item-key="id"
     >
-      <div v-for="element in lists" :key="element.id">{{element}}</div>
 
       <template #item="{ element, index }">
         <li class="list-group-item li-drag">
