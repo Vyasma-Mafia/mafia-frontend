@@ -5,7 +5,7 @@
         v-model="search"
         type="search"
         class="search"
-        placeholder="Имя игрока"
+        placeholder="Поиск по имени"
         />
 
     </div>

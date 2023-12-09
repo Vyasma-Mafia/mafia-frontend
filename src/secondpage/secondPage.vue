@@ -1,13 +1,6 @@
 <template>
-
-  <vPopup
-      v-if="isDelete"
-      @closePopup="closePopup"
-      @remove="removeFromList(delItem)"
-      :popupHeader="'Удаление игрока'"
-      :btnStr2="'Да'"
-      :btnStr3="'Нет'"
-  >
+  <vPopup v-if="isDelete" @closePopup="closePopup" @remove="removeFromList(delItem)" :popupHeader="'Удаление игрока'"
+    :btnStr2="'Да'" :btnStr3="'Нет'">
     <!--1-->
     <b>Вы дествительно хотите удалить игрока из списка?</b>
   </vPopup>
@@ -18,25 +11,12 @@
   <div class="container card2" v-if="isLoad">
     <div class="razr">v.1.2 Abobus</div>
     <div class="form-control center" id="inputDiv" :class="inputWarning ? '' : 'invalid'" @submit.prevent="">
-      <input
-          type="text"
-          class="inputAdd"
-          ref="addInput"
-          id="addPlayer"
-          @input="assertMaxChars"
-          v-model="value"/>
+      <input type="text" class="inputAdd" ref="addInput" id="addPlayer" @input="assertMaxChars" v-model="value" />
       <button class="button-add" @click="addPlayer"><span>Добавить</span></button>
     </div>
-    <TheSearch
-        @addList="colorChange"
-        :persons="persons"
-        :personsChose="provList"
-        @updateColor="colorAddSearch"
-    ></TheSearch>
-    <DragList
-        :list="list"
-        @refresh="refreshList"
-        @randomSort="randomSort"></DragList>
+    <TheSearch @addList="colorChange" :persons="persons" :personsChose="provList" @updateColor="colorAddSearch">
+    </TheSearch>
+    <DragList :list="list" @refresh="refreshList" @randomSort="randomSort"></DragList>
 
     <!--    <footerM></footerM>-->
   </div>
@@ -55,7 +35,6 @@ import DragList from "./DragList";
 import TheSearch from "./TheSearch";
 import AppLoader from "../components/AppLoader";
 import router from "../router";
-import vPopup from '../components/v-popup';
 
 export default {
   data() {
@@ -70,7 +49,7 @@ export default {
       provList: [],
       list: [],
       value: '',
-      maxLengthInCars: 8,
+      maxLengthInCars: 20,
       minLengthInCars: 3
     }
   },
@@ -92,17 +71,17 @@ export default {
         gameType: "CLASSIC",
         playersIds: this.provList.map(item => item.id)
       })
-          .then(function (response) {
-            router.push({name: 'third', params: {gameId: response.data}})
-            // console.log(response.data)
-          })
-          .catch(function (error) {
-            alert('Ошибка сервера ' + error)
-          });
+        .then(function (response) {
+          router.push({ name: 'third', params: { gameId: response.data } })
+          // console.log(response.data)
+        })
+        .catch(function (error) {
+          alert('Ошибка сервера ' + error)
+        });
     },
     async loadPeople() {
 
-      const {data} = await axios.get(this.url + '/player')
+      const { data } = await axios.get(this.url + '/player')
       this.persons = data
       setTimeout(() => {
         this.isLoad = true
@@ -132,8 +111,6 @@ export default {
       if (SearchIdElement.classList.contains('nochose')) {
         SearchIdElement.classList.add("chose");
         SearchIdElement.classList.remove("nochose");
-        console.log(element)
-        console.log(this.list)
         this.list.push(element)
         this.provList.push(element)
 
@@ -158,14 +135,14 @@ export default {
         const res = await axios.post(this.url + '/player', {
           name: this.value
         })
-            .then(function (response) {
-              if (response.data !== 'CONFLICT') {
-                return response
-              }
-            })
-            .catch(function () {
-              return 400
-            });
+          .then(function (response) {
+            if (response.data !== 'CONFLICT') {
+              return response
+            }
+          })
+          .catch(function () {
+            return 400
+          });
         let elementNew = {
           name: this.value,
           id: res.data
@@ -178,7 +155,7 @@ export default {
           this.persons.push(elementNew)
           this.provList.push(elementNew)
           this.list.push(elementNew)
-        }else {
+        } else {
           console.log(res)
           this.inputWarning = false
           this.$refs.addInput.blur()
@@ -224,7 +201,7 @@ export default {
   //
   //   }
   // },
-  components: { DragList, TheSearch, AppLoader, vPopup}
+  components: { DragList, TheSearch, AppLoader }
 }
 </script>
 
@@ -235,7 +212,7 @@ export default {
   background-color: white;
   width: 100px;
   padding: 2px;
-  border:1px solid #2c3e50;
+  border: 1px solid #2c3e50;
   color: #000000;
   text-align: center;
   font-size: 0.6em;

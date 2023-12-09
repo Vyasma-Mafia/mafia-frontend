@@ -39,17 +39,10 @@
           ></i>
           <div class="list-index">{{ index + 1 }}</div>
           <div class="list-elem"><strong>{{ element.name }}</strong></div>
-          <div class="list-elem-del" @click="alertDel(element)"><img src="../img/delete.svg" style="height:25px;" alt=""></div>
         </li>
       </template>
 
     </draggable>
-    <!--    <p><strong>Прошлый:</strong>{{ oldIndex }}</p>-->
-    <!--    <p><strong>Новый:</strong> {{ newIndex }}</p>-->
-
-
-    <!--    <rawDisplayer class="col-3" :value="list" title="List"/>-->
-    <!--    &ndash;&gt;-->
   </div>
 </template>
 
@@ -76,24 +69,21 @@ export default {
   },
   data() {
     return {
-      // drag: false,
-      oldIndex: '',
-      newIndex: '',
+      drag: false,
       lists: this.list,
     };
   },
 
   methods: {
 
-    endDrag(evt) {
+    endDrag() {
       this.isDrag = false;
-      this.oldIndex = evt.oldIndex;
-      this.newIndex = evt.newIndex;
       this.$emit('refresh', this.lists)
+      this.$forceUpdate.apply(this.lists)
     },
     startDrag() {
       this.isDrag = true;
-      this.closePopup()
+      // this.closePopup()
     },
     alertDel(elem) {
       this.$emit('remove', elem);

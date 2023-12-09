@@ -118,7 +118,7 @@ body {
     display: none;
 }
 .inputAdd{
-    width: 10rem !important;
+    width: 20rem !important;
 }
 .container.card {
     overflow:hidden; overflow-y:scroll;
