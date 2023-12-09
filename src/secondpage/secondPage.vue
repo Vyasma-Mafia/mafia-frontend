@@ -67,6 +67,8 @@ export default {
     async roteThirdPage() {
       // // console.log(this.provList)
       // // console.log(this.provList.map(item => item.id))
+      this.list = [...new Set(this.list)]
+      this.provList = [...new Set(this.provList)]
       await axios.post(this.url + '/game', {
         gameType: "CLASSIC",
         playersIds: this.provList.map(item => item.id)
@@ -113,8 +115,8 @@ export default {
         SearchIdElement.classList.remove("nochose");
         this.list.push(element)
         this.provList.push(element)
-
-
+        this.list = [...new Set(this.list)]
+        this.provList = [...new Set(this.provList)]
       } else {
         SearchIdElement.classList.add("nochose");
         SearchIdElement.classList.remove("chose");
