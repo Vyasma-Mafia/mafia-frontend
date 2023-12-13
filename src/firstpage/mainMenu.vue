@@ -25,7 +25,7 @@
           <div class="playername">{{ player.playerName }}</div>
           <div class="gamesWin">{{ player.totalWins }}</div>
           <div class="allGames">{{ player.totalGames }}</div>
-          <div class="ratingCount">{{ player.rating }}</div>
+          <div class="ratingCount">{{ player.rating.toFixed(2) }}</div>
         </li>
       </ol>
     </div>

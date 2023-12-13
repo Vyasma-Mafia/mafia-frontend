@@ -1,4 +1,7 @@
+const backendHost = process.env.BACKEND_HOST;
+
 module.exports = {
     devServer: {
-        proxy: 'http://backend:8081'
-    } }
+        proxy: "http://" + backendHost + ":8081"
+    }
+}
