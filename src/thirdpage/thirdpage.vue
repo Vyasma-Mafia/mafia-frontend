@@ -867,7 +867,7 @@ li.liPlayers {
   border: 2px solid #2c3e50;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   background-color: #fff;
 
   &.death {
