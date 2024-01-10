@@ -33,7 +33,9 @@ export default {
       colorTimer: '#2c3e50',
       pause: false,
       myPause: faPause,
-      myPlay: faPlay
+      myPlay: faPlay,
+      audio3: new Audio("/Start_Countdown_mp3_1702338457.mp3"),
+      audio10: new Audio("/mainSignal.wav")
     }
   },
 
@@ -52,12 +54,20 @@ export default {
       this.stopTimer()
       this.pause = false
       this.currentTime = time
+      this.audio3.currentTime = 0
+      this.audio10.currentTime = 0
       this.timer = setInterval(() => {
 
-        // eslint-disable-next-line no-empty
         if (this.currentTime <= 11) {
-
           this.colorTimer = '#e53935'
+        }
+
+        if (this.currentTime == 11) {
+          this.audio10.play()
+        }
+
+        if (this.currentTime == 4) {
+          this.audio3.play()
         }
 
         if (this.currentTime <= 0) {
@@ -72,6 +82,8 @@ export default {
     stopTimer() {
       this.colorTimer = '#2c3e50';
       clearTimeout(this.timer)
+      this.audio3.pause()
+      this.audio10.pause()
     },
   },
   watch: {
