@@ -34,7 +34,7 @@ export default {
       pause: false,
       myPause: faPause,
       myPlay: faPlay,
-      audio3: new Audio("/Start_Countdown_mp3_1702338457.mp3"),
+      audio3: new Audio("/countdown.mp3"),
       audio10: new Audio("/mainSignal.wav")
     }
   },
@@ -62,11 +62,11 @@ export default {
           this.colorTimer = '#e53935'
         }
 
-        if (this.currentTime == 11) {
+        if (this.currentTime == 12) {
           this.audio10.play()
         }
 
-        if (this.currentTime == 4) {
+        if (this.currentTime == 5) {
           this.audio3.play()
         }
 
