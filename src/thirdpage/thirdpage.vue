@@ -19,17 +19,12 @@
       </p></b>
   </v-popup>
   <!-- МОДАЛКB ЗАВЕРШЕНИЯ ИГРЫ -->
-  <v-popup v-if="gameOver" @closePopup="closePopupGame" @endGame="endGame"
-  :popupHeader="'Завершение игры'" 
-  :btn3="blackCanWin ? 'Мафия' : ''" 
-  :btn4="'Игра не состоялась'"
-  :btn5="redCanWin ? 'Мирные' : ''"
-  :btn3s="!(blackCanWin) ? 'Мафия' : ''" 
-  :btn5s="!(redCanWin) ? 'Мирные' : ''"
-  >
+  <v-popup v-if="gameOver" @closePopup="closePopupGame" @endGame="endGame" :popupHeader="'Завершение игры'"
+    :btn3="blackCanWin ? 'Мафия' : ''" :btn4="'Игра не состоялась'" :btn5="redCanWin ? 'Мирные' : ''"
+    :btn3s="!(blackCanWin) ? 'Мафия' : ''" :btn5s="!(redCanWin) ? 'Мирные' : ''">
 
 
-  <b style="margin-bottom: 11px">Уважаемый ведущий, пожалуйста укажите кто победил в этой игре.</b>
+    <b style="margin-bottom: 11px">Уважаемый ведущий, пожалуйста укажите кто победил в этой игре.</b>
   </v-popup>
 
   <div class="roleOpen" @click="roleShow = !roleShow" v-if="isLoad">
@@ -127,7 +122,30 @@
               </div>
             </div>
             <div class="deathElse" v-else>
-              {{ player.playerName }}
+              <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
+              <div class="playerName">{{ player.playerName }}</div>
+              <div class="playerRole">
+                <div class="showRoles">
+                  <vue-flip v-model="roleShow" width="24px" height="25px">
+                    <template v-slot:front class="front">
+                      <div class="maf" v-if="player.role == 'BLACK'"><img src="../img/maf.svg" alt=""
+                          style="width:25px; height:25px;"></div>
+                      <div class="sherif" v-if="player.role == 'SHERIFF'"><img src="../img/sherif.svg" alt=""
+                          style="width:25px; height:25px;"></div>
+                      <div class="red" v-if="player.role == 'RED'"><img src="../img/mirn.svg" alt=""
+                          style="width:25px; height:25px;"></div>
+                      <div class="don" v-if="player.role == 'DON'"><img src="../img/don.svg" alt=""
+                          style="width:25px; height:25px;"></div>
+                    </template>
+                    <template v-slot:back class="back">
+                      <div class="shirt">
+                        <div class="shirt"><img src="../img/card.svg" alt="" style="width:25px; height:25px;"></div>
+                      </div>
+                    </template>
+                  </vue-flip>
+                </div>
+              </div>
+
             </div>
           </li>
 
@@ -135,14 +153,14 @@
       </div>
     </div>
     <div class="input-row">
-    <h3> Лучший ход: (по номерам) </h3>
+      <h3> Лучший ход: (по номерам) </h3>
       <input type="text" maxlength="2" placeholder="От" v-model="fromBestTurn">
       <input type="text" maxlength="2" placeholder="1" v-model="bestTurn1">
       <input type="text" maxlength="2" placeholder="2" v-model="bestTurn2">
       <input type="text" maxlength="2" placeholder="3" v-model="bestTurn3">
     </div>
   </div>
-  
+
   <!--  <footerM v-if="isLoad"> </footerM>-->
   <div class="bottom">
     <button class="button-refresh-role" v-if="!getJson.gameStarted && isLoad" @click="reshuffleGame"><span>Поменять
@@ -270,6 +288,25 @@ export default {
           this.gameEndWho = 'МАФИИ'
         }
       }
+    },
+    async relivePlayer() {
+      if (this.startGame) {
+        await axios.patch(this.url + '/gameInfo', {
+          id: this.$route.params.gameId,
+          playerId: this.delPlayer.playerId,
+          fouls: this.delPlayer.foul,
+          alive: true,
+          role: this.delPlayer.role,
+          points: 3,
+        }).then(function (response) {
+          return response
+        }
+        )
+          .catch(function (error) {
+            alert('Ошибка сервера ' + error)
+          })
+      }
+      this.fetchData();
     },
     async reshuffleGame() {
       const reshuffle = await axios.post(this.url + '/game/reshuffle', {
@@ -624,7 +661,8 @@ button {
 }
 
 .input-row input {
-  width: 50px; /* adjust the width as per your requirement */
+  width: 50px;
+  /* adjust the width as per your requirement */
   margin: 5px;
   padding: 5px;
   font-size: 30px;
@@ -914,5 +952,4 @@ ul.ulList {
   text-align: center;
   font-size: 0.6em;
 }
-
 </style>
