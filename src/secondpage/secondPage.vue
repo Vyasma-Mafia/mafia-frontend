@@ -125,10 +125,11 @@ export default {
         this.provList = this.provList.filter((item) => item.id !== idToRemove);
         // //console.log(this.provList)
       }
+      this.search = ''
     },
     async addPlayer() {
 
-      if (this.value.length <= this.minLengthInCars) {
+      if (this.value.length < this.minLengthInCars) {
         this.inputWarning = false
         // // console.log(1)
         this.$refs.addInput.blur()
