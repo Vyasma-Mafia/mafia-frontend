@@ -68,7 +68,7 @@
       </div>
       <div class="list">
         <ul class="ulList">
-          <li class="liPlayers" :class="player.alive ? 'deathElse' : 'death'" v-for="(player, index) in playersList"
+          <li class="liPlayers" :class="player.alive ? '' : 'death'" v-for="(player, index) in playersList"
             :key="player.playerId">
             <div class="death" v-if="player.alive">
               <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
@@ -122,30 +122,37 @@
               </div>
             </div>
             <div class="deathElse" v-else>
-              <div class="playerIndex" @click="relivePlayer(player)">{{ player.sitNumber }}</div>
+              <div class="playerIndex death" @click="relivePlayer(player)">{{ player.sitNumber }}</div>
               <div class="playerName">{{ player.playerName }}</div>
-              <div class="playerRole">
-                <div class="showRoles">
-                  <vue-flip v-model="roleShow" width="24px" height="25px">
-                    <template v-slot:front class="front">
-                      <div class="maf" v-if="player.role == 'BLACK'"><img src="../img/maf.svg" alt=""
-                          style="width:25px; height:25px;"></div>
-                      <div class="sherif" v-if="player.role == 'SHERIFF'"><img src="../img/sherif.svg" alt=""
-                          style="width:25px; height:25px;"></div>
-                      <div class="red" v-if="player.role == 'RED'"><img src="../img/mirn.svg" alt=""
-                          style="width:25px; height:25px;"></div>
-                      <div class="don" v-if="player.role == 'DON'"><img src="../img/don.svg" alt=""
-                          style="width:25px; height:25px;"></div>
-                    </template>
-                    <template v-slot:back class="back">
-                      <div class="shirt">
-                        <div class="shirt"><img src="../img/card.svg" alt="" style="width:25px; height:25px;"></div>
-                      </div>
-                    </template>
-                  </vue-flip>
+              <div class="activity">
+                <div class="playerRole">
+                  <div class="showRoles">
+                    <vue-flip v-model="roleShow" width="25px" height="25px">
+                      <template v-slot:front class="front">
+                        <div class="maf" v-if="player.role == 'BLACK'"><img src="../img/maf.svg" alt=""
+                            style="width:25px; height:25px;"></div>
+                        <div class="sherif" v-if="player.role == 'SHERIFF'"><img src="../img/sherif.svg" alt=""
+                            style="width:25px; height:25px;"></div>
+                        <div class="red" v-if="player.role == 'RED'"><img src="../img/mirn.svg" alt=""
+                            style="width:25px; height:25px;"></div>
+                        <div class="don" v-if="player.role == 'DON'"><img src="../img/don.svg" alt=""
+                            style="width:25px; height:25px;"></div>
+                      </template>
+                      <template v-slot:back class="back">
+                        <div class="shirt">
+                          <div class="shirt"><img src="../img/card.svg" alt="" style="width:25px; height:25px;"></div>
+                        </div>
+                      </template>
+                    </vue-flip>
+                  </div>
+                </div>
+                <div class="activ" v-if="this.startGame">
+                  <div class="playerPut"></div>
+                  <div class="foulTake" ></div>
+                  <div class="foul death"><span>{{ player.foul }}</span></div>
+                  <div class="foulAdd"></div>
                 </div>
               </div>
-
             </div>
           </li>
 
@@ -546,7 +553,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .activ {
   position: relative;
   display: inline;
@@ -812,6 +818,7 @@ fade-enter-active,
   padding: 6px;
   padding-right: 10px;
   padding-bottom: 9px;
+  width: 30px;
   color: #41B883;
   text-shadow: 1px 0 1px #000,
     0 1px 1px #000,
@@ -838,6 +845,10 @@ fade-enter-active,
     background-color: #ddd;
     font-weight: 700;
   }
+
+  &.death {
+    color: #000;
+  }
 }
 
 .foulTake {
@@ -845,6 +856,7 @@ fade-enter-active,
   /*border-right: 2px solid #2c3e50;*/
   padding: 6px;
   padding-bottom: 9px;
+  width: 30px;
   text-shadow: 0.3px 0 0.3px #425b75,
     0 0.3px 0.3px #425b75,
     -0.3px 0 0.3px #425b75,
@@ -873,6 +885,11 @@ fade-enter-active,
     0 1px 1px #000,
     -1px 0 1px #000,
     0 -1px 1px #000;
+
+  &.death {
+  background-color: #236400;
+
+  }
   //border-bottom-left-radius: 10px;
   //border-top-left-radius: 10px;
   //border-left: 2px solid #2c3e50;
@@ -900,12 +917,8 @@ li.liPlayers {
   background-color: #fff;
 
   &.death {
-    background-color: #2c3e50 !important;
-  }
-
-  &.deathElse {
     color: #ddd;
-    background-color: #2c3e50;
+    background-color: #2c3e50 !important;
   }
 }
 
