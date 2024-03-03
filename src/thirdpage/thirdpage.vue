@@ -911,6 +911,11 @@ li.liPlayers {
   &.death {
     background-color: #2c3e50 !important;
   }
+
+  &.deathElse {
+    color: #ddd;
+    background-color: #2c3e50;
+  }
 }
 
 
