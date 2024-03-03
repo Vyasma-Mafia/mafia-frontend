@@ -122,7 +122,7 @@
               </div>
             </div>
             <div class="deathElse" v-else>
-              <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
+              <div class="playerIndex" @click="relivePlayer(player)">{{ player.sitNumber }}</div>
               <div class="playerName">{{ player.playerName }}</div>
               <div class="playerRole">
                 <div class="showRoles">
@@ -289,14 +289,14 @@ export default {
         }
       }
     },
-    async relivePlayer() {
+    async relivePlayer(player) {
       if (this.startGame) {
         await axios.patch(this.url + '/gameInfo', {
           id: this.$route.params.gameId,
-          playerId: this.delPlayer.playerId,
-          fouls: this.delPlayer.foul,
+          playerId: player.playerId,
+          fouls: player.foul,
           alive: true,
-          role: this.delPlayer.role,
+          role: player.role,
           points: 3,
         }).then(function (response) {
           return response
