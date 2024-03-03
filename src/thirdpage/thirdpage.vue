@@ -68,7 +68,7 @@
       </div>
       <div class="list">
         <ul class="ulList">
-          <li class="liPlayers" :class="player.alive ? '' : 'death'" v-for="(player, index) in playersList"
+          <li class="liPlayers" :class="player.alive ? 'deathElse' : 'death'" v-for="(player, index) in playersList"
             :key="player.playerId">
             <div class="death" v-if="player.alive">
               <div class="playerIndex" @click="showPopup(player, player.sitNumber)">{{ player.sitNumber }}</div>
