@@ -546,15 +546,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.deathElse {
-  padding: 6px;
-  color: #ddd;
-  background-color: #2c3e50;
-  font-weight: 700;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
 
 .activ {
   position: relative;
