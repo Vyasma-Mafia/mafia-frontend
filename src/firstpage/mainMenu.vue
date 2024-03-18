@@ -106,17 +106,19 @@
       <div class="scrollable">
         <ul class="ulBorder">
           <li v-for="games in endGames" :key="games.gameId">
-            <a class="link" :href="'/finishedGame/' + games.gameId">
-              <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
-                <div class="gamePlayersNick">
-                  {{ games.playerNames.toString() }}
+            <div class="link">
+              <a :href="'/finishedGame/' + games.gameId">
+                <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
+                  <div class="gamePlayersNick">
+                    {{ games.playerNames.toString() }}
+                  </div>
+                  <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
+                      style="height:25px;"></div>
+                  <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
+                      style="height:25px;"></div>
                 </div>
-                <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
-                    style="height:25px;"></div>
-                <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
-                    style="height:25px;"></div>
-              </div>
-            </a>
+              </a>
+            </div>
           </li>
         </ul>
       </div>
@@ -402,23 +404,22 @@ ol {
   a:link {
     color: rgb(0, 0, 0);
   }
-  
+
   /* visited link */
   a:visited {
     color: rgb(87, 87, 87);
   }
-  
+
   /* mouse over link */
   a:hover {
     color: hotpink;
   }
-  
+
   /* selected link */
   a:active {
     color: blue;
-  } 
+  }
 }
 
- /* unvisited link */
-
+/* unvisited link */
 </style>
