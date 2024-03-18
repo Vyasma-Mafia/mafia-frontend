@@ -118,7 +118,6 @@
                   <div class="foul"><span>{{ player.foul }}</span></div>
                   <div class="foulAdd" @click="FoulAdd(index, player.playerId)"><i class="fa fa-plus"></i></div>
                 </div>
-                <!--            <div class="playerKick">X</div>-->
               </div>
             </div>
             <div class="deathElse" v-else>
@@ -161,10 +160,12 @@
     </div>
     <div class="input-row">
       <h3> Лучший ход: (по номерам) </h3>
-      <input type="text" maxlength="2" placeholder="От" v-model="fromBestTurn">
-      <input type="text" maxlength="2" placeholder="1" v-model="bestTurn1">
-      <input type="text" maxlength="2" placeholder="2" v-model="bestTurn2">
-      <input type="text" maxlength="2" placeholder="3" v-model="bestTurn3">
+      <div >
+        <input type="number" maxlength="2"  min="1" max="10" placeholder="От" v-model="fromBestTurn">
+        <input type="number" maxlength="2"  min="1" max="10" placeholder="1" v-model="bestTurn1">
+        <input type="number" maxlength="2"  min="1" max="10" placeholder="2" v-model="bestTurn2">
+        <input type="number" maxlength="2"  min="1" max="10" placeholder="3" v-model="bestTurn3">
+      </div>
     </div>
   </div>
 
