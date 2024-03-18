@@ -106,15 +106,17 @@
       <div class="scrollable">
         <ul class="ulBorder">
           <li v-for="games in endGames" :key="games.gameId">
-            <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
-              <div class="gamePlayersNick">
-                {{ games.playerNames.toString() }}
+            <a class="link" :href="'/finishedGame/' + games.gameId">
+              <div class="gamePlayers" :class="games.winByRed ? 'red' : 'black'">
+                <div class="gamePlayersNick">
+                  {{ games.playerNames.toString() }}
+                </div>
+                <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
+                    style="height:25px;"></div>
+                <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
+                    style="height:25px;"></div>
               </div>
-              <div class="gamePlayersEnter" v-if="!games.winByRed"><img src="../img/don.svg" alt=""
-                                                                        style="height:25px;"></div>
-              <div class="gamePlayersEnter" v-if="games.winByRed"><img src="../img/mirn.svg" alt=""
-                                                                       style="height:25px;"></div>
-            </div>
+            </a>
           </li>
         </ul>
       </div>
@@ -148,36 +150,36 @@ export default {
   mounted() {
 
     axios
-        .get(this.url + '/game/active')
-        .then(response => {
-          this.activeGames = response.data;
-        })
-        .catch(error => {
-          alert(error);
-          this.errored = true;
-        })
-        .finally(() => (
+      .get(this.url + '/game/active')
+      .then(response => {
+        this.activeGames = response.data;
+      })
+      .catch(error => {
+        alert(error);
+        this.errored = true;
+      })
+      .finally(() => (
+        axios
+          .get(this.url + '/game/nonactive')
+          .then(response => {
+            this.endGames = response.data;
+          })
+          .catch(error => {
+            alert(error);
+          })
+          .finally(() => (
             axios
-                .get(this.url + '/game/nonactive')
-                .then(response => {
-                  this.endGames = response.data;
-                })
-                .catch(error => {
-                  alert(error);
-                })
-                .finally(() => (
-                    axios
-                        .get(this.url + '/player/rating')
-                        .then(response => {
-                          this.ratingList = response.data;
-                          this.isLoad = true;
-                        })
-                        .catch(error => {
-                          alert(error);
-                          this.isLoad = true;
-                        })
-                ))
-        ));
+              .get(this.url + '/player/rating')
+              .then(response => {
+                this.ratingList = response.data;
+                this.isLoad = true;
+              })
+              .catch(error => {
+                alert(error);
+                this.isLoad = true;
+              })
+          ))
+      ));
   },
   methods: {
     async ratingModal() {
@@ -185,14 +187,14 @@ export default {
 
     },
     routeActive(val) {
-      router.push({name: 'third', params: {gameId: val}})
+      router.push({ name: 'third', params: { gameId: val } })
     },
     pinCode() {
       this.isPin = !this.isPin
     }
   },
 
-  components: { AppLoader}
+  components: { AppLoader }
 }
 </script>
 
@@ -204,7 +206,7 @@ export default {
   background-color: white;
   width: 100px;
   padding: 2px;
-  border:1px solid #2c3e50;
+  border: 1px solid #2c3e50;
   color: #000000;
   text-align: center;
   font-size: 0.6em;
@@ -277,11 +279,11 @@ ol {
   margin-bottom: 10px;
 }
 
-.rating-li > div {
+.rating-li>div {
   display: inline-block;
 }
 
-.rating-li > div > div {
+.rating-li>div>div {
   display: inline-block;
 }
 
@@ -328,11 +330,11 @@ ol {
   font-size: 12px;
 }
 
-.rating-li1 > div {
+.rating-li1>div {
   display: inline-block;
 }
 
-.rating-li1 > div > div {
+.rating-li1>div>div {
   display: inline-block;
 }
 
@@ -350,9 +352,11 @@ ol {
     transform: scale(0) rotateZ(0deg) translateX(-250px);
     opacity: 0;
   }
+
   75% {
     opacity: 1;
   }
+
   100% {
     transform: scale(1) rotateZ(360deg) translateX(0px);
     opacity: 1;
@@ -367,9 +371,11 @@ ol {
   transition: all .4s cubic-bezier(0.5, 0.5, 0.5, 1.0);
 }
 
-.roll-enter, .roll-leave-to
-  /* .slide-fade-leave-active до версии 2.1.8 */
-{
+.roll-enter,
+.roll-leave-to
+
+/* .slide-fade-leave-active до версии 2.1.8 */
+  {
   transform: translateY(100vh);
   opacity: 0;
 }
@@ -390,4 +396,29 @@ ol {
   overflow: hidden;
   overflow-y: auto;
 }
+
+.link {
+
+  a:link {
+    color: rgb(0, 0, 0);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(87, 87, 87);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  } 
+}
+
+ /* unvisited link */
+
 </style>
