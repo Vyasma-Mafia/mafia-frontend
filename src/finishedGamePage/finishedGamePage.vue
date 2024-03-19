@@ -101,7 +101,7 @@ export default {
       this.blackCanWin = this.getJson.canBlackWin
       this.redCanWin = this.getJson.canRedWin
       if (this.gameEnd) {
-        if (this.gameEnd) {
+        if (this.getJson.redWin) {
           this.gameEndWho = 'МИРНЫX'
         } else {
           this.gameEndWho = 'МАФИЯ'
