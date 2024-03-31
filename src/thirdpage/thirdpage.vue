@@ -186,6 +186,7 @@ import axios from "axios";
 import AppLoader from "../components/AppLoader";
 import router from "../router";
 
+const DEFAULT_POINTS = 3;
 export default {
   data() {
     return {
@@ -267,7 +268,7 @@ export default {
           fouls: this.delPlayer.foul,
           alive: false,
           role: this.delPlayer.role,
-          points: 3,
+          points: DEFAULT_POINTS,
         })
           .then(function (response) {
             return response
@@ -305,7 +306,7 @@ export default {
           fouls: player.foul,
           alive: true,
           role: player.role,
-          points: 3,
+          points: DEFAULT_POINTS,
         }).then(function (response) {
           return response
         }
@@ -421,7 +422,7 @@ export default {
           fouls: this.playersList[idx].foul,
           alive: true,
           role: role,
-          points: 3,
+          points: DEFAULT_POINTS,
         })
           .then(function (response) {
             return response
@@ -462,7 +463,7 @@ export default {
           playerId: player,
           fouls: fouls,
           alive: true,
-          points: 3,
+          points: DEFAULT_POINTS,
         })
           .then(function (response) {
             return response
@@ -498,7 +499,7 @@ export default {
           playerId: player,
           fouls: fouls,
           alive: true,
-          points: 3,
+          points: DEFAULT_POINTS,
         })
           .then(function (response) {
             return response
